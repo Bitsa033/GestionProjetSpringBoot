@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Gestion Admin Cam</title>
+    <!-- Fonts -->
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+	 <link rel="stylesheet" href="bibliotheque/font/css/all.min.css">
+	 <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+	 
+	 <link rel="icon" type="image/x-icon" href="bibliotheque/assets/favicon.ico" />
+	
+	<link href="bibliotheque/css/styles.css" rel="stylesheet" />
+	
+	<script src="bibliotheque/js/popper.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+	</script>
+	<script>
+	    window.jQuery || document.write('<script src="bibliotheque/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="bibliotheque/vendor/vendor/popper.min.js"></script>
+	<script src="bibliotheque/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div th:replace="layouts/nav_admin::nav"></div>
+    <section class="page-section" id="contact">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6 text-center">
+                    <h2 class="mt-0">Modification de l'autorité' n° <p th:text="${autorite_id}" class="btn btn-warning"></p></h2>
+                    <hr class="divider" />
+                </div>
+            </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                <div class="col-lg-6">
+
+                    <form autocomplete="off" method="POST" th:action="@{update_data_autorite_admin}" th:object="${autorite}">
+                       
+                        <!-- Name input-->
+                        <div class="form-floating mb-3">
+                            <input th:field="*{nom}" class="form-control" id="matricule" type="text"
+                                placeholder="Nom de l'autorité'..." required />
+                            <label for="name">Nom de l'autorité'.</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Ce champ est obligatoire.
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input th:field="*{type}" class="form-control"  type="text"
+                                placeholder="Fonction..." required />
+                            <label for="name">Fonction</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Ce champ est obligatoire.
+                            </div>
+                        </div>
+                        
+                        <!-- Submit Button-->
+                        <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton"
+                                type="submit">Modifier</button></div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+</body>
+
+</html>

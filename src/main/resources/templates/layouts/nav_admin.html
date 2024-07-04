@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Gestion des véhicules</title>
+        <!--Links css-->
+        <link rel="dns-prefetch" href="//fonts.bunny.net">
+	    
+    </head>
+    <body id="page-top">
+        <div th:fragments="nav">
+            <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light rounded">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+                  <ul class="navbar-nav">
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="http://example.com"
+                       id="dropdown10" data-toggle="dropdown" aria-haspopup="true" 
+                       aria-expanded="false">
+                       <i class="fa fa-th"></i>
+                       Autorités</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                        
+                        <a class="dropdown-item" th:href="@{page_autorite}">Afficher</a>
+                      </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="http://example.com
+                      " id="dropdown10" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                       <i class="fa fa-th"></i>
+                       Régions</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                       
+                        <a class="dropdown-item" th:href="@{page_region}">Afficher</a>
+                      </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="http://example.com"
+                       id="dropdown10" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-th"></i>
+                        Départements</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                       
+                        <a class="dropdown-item" th:href="@{page_departement}">Afficher</a>
+                      </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="http://example.com"
+                       id="dropdown10" data-toggle="dropdown" aria-haspopup="true" 
+                       aria-expanded="false">
+                       <i class="fa fa-th"></i>
+                       Arrondissements</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                        
+                        <a class="dropdown-item" href="">Afficher</a>
+                      </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="http://example.com"
+                       id="dropdown10" data-toggle="dropdown" aria-haspopup="true" 
+                       aria-expanded="false">
+                       <i class="fa fa-th"></i>
+                       Communes</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                        
+                        <a class="dropdown-item" href="">Afficher</a>
+                      </div>
+                    </li>
+                    
+                    <li class="nav-item active">
+                      <a class="nav-link" th:href="@{page_recherche_faq}"> <i class="fa fa-search"></i> FAQ</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle offset-8" href="http://example.com"
+                       id="dropdown10" data-toggle="dropdown" aria-haspopup="true" 
+                       aria-expanded="false">
+                       <i class="fa fa-user"></i>
+                       Utilsateur</a>
+                      <div class="dropdown-menu" aria-labelledby="dropdown10">
+                        
+                        <a class="dropdown-item" th:href="@{logout}">Se déconnecter</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+        </div>
+    </body>
+</html>

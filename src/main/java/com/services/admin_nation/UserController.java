@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class UserController {
 	
 	@Autowired
-	private ServicesUsers servicesUsers;
+	private UsersService servicesUsers;
 	
 	AdministrationCamerounApplication va= new AdministrationCamerounApplication();
 	

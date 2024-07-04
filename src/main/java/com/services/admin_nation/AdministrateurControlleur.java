@@ -22,6 +22,8 @@ public class AdministrateurControlleur {
 	@Autowired
 	private RegionService servicesRegions;
 	@Autowired
+	private ArrondissementService servicesArron;
+	@Autowired
 	private DepartementService servicesDep;
 	@Autowired
 	private AutoriteService servicesAutorite;
@@ -149,7 +151,7 @@ public class AdministrateurControlleur {
 	// Méthodes pour l'entité Depament
 	
 	@GetMapping("findAll_data_departements_admin")
-	String findAll_data_autorites(Model model) {
+	String findAll_data_departements_admin(Model model) {
 		List<Departement> departements=servicesDep.displayData();
 		if (departements.isEmpty()) {
 			Departement c= new Departement(adminCam.genererID(),"Mfoundi","yaoundé","","","Centre");
@@ -408,33 +410,135 @@ public class AdministrateurControlleur {
 		return "administrateur/recherches/recherche_par_departement";
 	}
 	
-	@GetMapping("recherche_faq_admin")
-	public String recherche_faq_admin(Model model) {
-		Search search = new Search();
-		model.addAttribute("search", search);
-		return "administrateur/recherches/add_data";
+	@GetMapping("recherche_par_arrondissement_admin")
+	String recherche_par_arrondissement_admin(Model model, @ModelAttribute("arrondissement") Search search) {
+		String key_name=search.getKeyName();
+		
+		List<Arrondissement> arrondissements=serviceSearch.search_arrondissement(key_name);
+		model.addAttribute("arrondissements", arrondissements);
+		
+		
+		return "administrateur/recherches/recherche_par_arrondissement";
 	}
 	
-	@GetMapping("find_all_data_faq_admin")
-	String get_data_recherche_by_region(Model model, @ModelAttribute("search") Search search) {
-		String key_name=search.getKeyName();
-		String key_type=search.getKeyType();
-		
-		if (key_type.equals("region")) {
-			List<Region> regions=serviceSearch.search_region(key_name);
-			model.addAttribute("regions", regions);
+	
+	//méthodes pour l'entité arrondissement
+	
+	@GetMapping("findAll_data_arrondissements_admin")
+	String findAll_data_arrondissements_admin(Model model) {
+		List<Arrondissement> arro=servicesArron.displayData();
+		if (arro.isEmpty()) {
+			Arrondissement c= new Arrondissement(adminCam.genererID(),"Yaoundé 1","yaoundé","","","Mfoundi");
+			Arrondissement e= new Arrondissement(adminCam.genererID(),"Yaoundé 2","yaoundé","","","Mfoundi");
+			Arrondissement e_n= new Arrondissement(adminCam.genererID(),"Yaoundé 3","yaoundé","","","Mfoundi");
+			Arrondissement s= new Arrondissement(adminCam.genererID(),"Yaoundé 4","yaoundé","","","Mfoundi");
+			Arrondissement a= new Arrondissement(adminCam.genererID(),"Yaoundé 5","yaoundé","","","Mfoundi");
+			Arrondissement ne= new Arrondissement(adminCam.genererID(),"Yaoundé 6","yaoundé","","","Mfoundi");
+			Arrondissement n= new Arrondissement(adminCam.genererID(),"Yaoundé 7","yaoundé","","","Mfoundi");
+			Arrondissement se= new Arrondissement(adminCam.genererID(),"","","","","Nyong et Kéllé");
+			Arrondissement l= new Arrondissement(adminCam.genererID(),"","","","","Nyon et Mfoumou");
+			Arrondissement o= new Arrondissement(adminCam.genererID(),"","","","","Nyon et Mfoumou");
+			servicesArron.saveData(c);
+			servicesArron.saveData(e);
+			servicesArron.saveData(e_n);
+			servicesArron.saveData(s);
+			servicesArron.saveData(a);
+			servicesArron.saveData(ne);
+			servicesArron.saveData(n);
+			servicesArron.saveData(se);
+			servicesArron.saveData(l);
+			servicesArron.saveData(o);
+			
+			return "redirect:findAll_data_arrondissements_admin";
 		}
-		else if (key_type.equals("autorite")) {
-			List<Autorite> autorites=serviceSearch.search_autorite(key_name);
-			model.addAttribute("autorites", autorites);
-		}
-		else if (key_type.equals("departement")) {
-			List<Departement> departements=serviceSearch.search_departement(key_name);
-			model.addAttribute("departements", departements);
-		}
-		
-		return "administrateur/recherches/findAll_data";
+		String nb_d= serviceSearch.nb_departements();
+		model.addAttribute("arrondissements", arro);
+		Search search=new Search();
+		model.addAttribute("arrondissement", search);
+		model.addAttribute("nb", nb_d);
+		return "administrateur/arrondissements/findAll_data";
 	}
+	
+	@GetMapping("print_data_arrondissements_admin")
+	String print_data_arrondissements_admin(Model model) {
+		List<Arrondissement> arr=servicesArron.displayData();
+		String nb_d= serviceSearch.nb_departements();
+		model.addAttribute("arrondissements", arr);
+		model.addAttribute("nb", nb_d);
+		return "administrateur/arrondissements/print_data";
+	}
+	
+	
+	@GetMapping("add_data_arrondissement_admin")
+	public String  add_data_arrondissement_admin(Model model) {
+		Arrondissement arrondissement= new Arrondissement();
+		model.addAttribute("arrondissement", arrondissement);
+		List<Autorite> auts=servicesAutorite.displayData();
+		List<Departement> dep=servicesDep.displayData();
+		model.addAttribute("autorites", auts);
+		model.addAttribute("departements", dep);
+		return "administrateur/arrondissements/add_data";
+		
+	}
+	
+	@GetMapping("find_data_arrondissement_admin")
+	public String  find_data_arrondisseement_admin(Model model) {
+		Arrondissement arr= new Arrondissement();
+		model.addAttribute("arrondissement", arr);
+		return "administrateur/arrondissements/find_data";
+		
+	}
+	
+	@PostMapping("edit_data_arrondissement_admin")
+	public String  edit_data_arrondissement_admin(Model model,@ModelAttribute("arrondissement") Arrondissement a) {
+		Optional<Arrondissement> r= servicesArron.findDataById(a.getId());
+		String r_id=r.get().getId();
+		model.addAttribute("arrondissement", r);
+		model.addAttribute("arrondissement_id", r_id);
+		return "administrateur/arrondissements/edit_data";
+		
+	}
+	
+	@PostMapping("save_data_arrondissement_admin")
+	RedirectView save_data_arrondissemnt_admin(@ModelAttribute("arrondissement") Arrondissement a) throws IOException{
+		
+		String id=adminCam.genererID();
+		Arrondissement r= new Arrondissement(id,a.getNom(),a.getChefLieu(),a.getAutorite(),a.getSuperficie(),a.getDepartement());
+		servicesArron.saveData(r);
+		return new RedirectView("findAll_data_arrondissements_admin");
+	}
+	
+	@PostMapping("update_data_arrondissement_admin")
+	public RedirectView update_data_arrondissements_admin(@ModelAttribute("arrondissement") Arrondissement a ) {
+		
+		String id=a.getId();
+		String nom=a.getNom();
+		String superficie=a.getSuperficie();
+		String autorite=a.getAutorite();
+		String cheflieu=a.getChefLieu();
+		String dep=a.getDepartement();
+		servicesArron.updateData(id,nom,cheflieu,autorite,superficie,dep);
+		
+		return new RedirectView("findAll_data_arrondissements_admin");
+		
+	}
+	
+	@GetMapping("delete_data_arrondissement_admin")
+	public String  delete_data_arrondissement_admin(Model model) {
+		Arrondissement arrondissement= new Arrondissement();
+		model.addAttribute("arrondissement", arrondissement);
+		return "administrateur/arrondissements/delete_data";
+		
+	}
+	
+	@PostMapping("destroy_data_arrondissement_admin")
+	public RedirectView destroy_data_arrondissement_admin(@ModelAttribute("arrondissement") Arrondissement arr) {
+		String r_id=arr.getId();
+		servicesArron.deleteData(r_id);
+		return new RedirectView("findAll_data_arrondissements_admin");
+		
+	}
+	
 	
 
 }

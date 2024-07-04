@@ -12,6 +12,8 @@ public class SearchService {
 	 private SearchAutoriteRepository searchAutoriteRepo;
 	 @Autowired
 	 private SearchDepartementRepository searchDepartementRepo;
+	 @Autowired
+	 private SearchArrondissementRepository searchArronRepo;
 	
 	List<Region> search_region(String keyName) {
 		
@@ -39,6 +41,11 @@ public class SearchService {
    String nb_autorites() {
 	   return searchAutoriteRepo.n_b_autorite();
    }
+
+ List<Arrondissement> search_arrondissement(String key_name) {
+	// TODO Auto-generated method stub
+	return searchArronRepo.search_arrondissement(key_name);
+}
    
    
 

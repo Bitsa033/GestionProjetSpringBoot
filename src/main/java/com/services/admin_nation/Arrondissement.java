@@ -11,6 +11,7 @@ public class Arrondissement {
 	private String ChefLieu;
 	private String autorite;
 	private String superficie;
+	private String departement;
 	
 	public String getId() {
 		return id;
@@ -52,13 +53,22 @@ public class Arrondissement {
 		this.superficie = superficie;
 	}
 
-	public Arrondissement(String id, String nom, String chefLieu, String autorite, String superficie) {
+	public String getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(String departement) {
+		this.departement = departement;
+	}
+
+	public Arrondissement(String id, String nom, String chefLieu, String autorite, String superficie,String departement) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		ChefLieu = chefLieu;
 		this.autorite = autorite;
 		this.superficie = superficie;
+		this.departement = departement;
 	}
 
 	public Arrondissement() {

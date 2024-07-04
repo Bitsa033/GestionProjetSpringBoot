@@ -254,24 +254,59 @@ public class RedictionController {
 		return "redirect:recherche_par_departement_user";
 	}
 	
-	@GetMapping("page_recherche_faq")
-	public String page_faq(HttpServletRequest http) {
+	@GetMapping("page_recherche_par_arrondissement")
+	public String page_recherche_par_arrondissement(HttpServletRequest http) {
 		if (http.isUserInRole("ADMIN")) {
-			return "redirect:recherche_faq_admin";
+			return "redirect:recherche_par_arrondissement_admin";
 		}
 		
-		return "redirect:recherche_faq_user";
+		return "redirect:recherche_par_arrondissement_user";
 	}
 	
-	@PostMapping("page_allData_faq")
-	public String page_allData_faq(HttpServletRequest http) {
+	@GetMapping("page_arrondissement")
+	public String page_arrondissement(HttpServletRequest http) {
 		if (http.isUserInRole("ADMIN")) {
-			return "redirect:find_all_data_faq_admin";
+			return "redirect:findAll_data_arrondissements_admin";
 		}
 		
-		return "redirect:find_all_data_faq_user";
+		return "redirect:findAll_data_arrondissements_user";
 	}
 	
+	@GetMapping("page_add_arrondissement")
+	public String page_add_arrondissement(HttpServletRequest http) {
+		if (http.isUserInRole("ADMIN")) {
+			return "redirect:add_data_arrondissement_admin";
+		}
+		
+		return "redirect:findAll_data_arrondissements_user";
+	}
+	
+	@GetMapping("page_get_arrondissement")
+	public String page_get_arrondissement(HttpServletRequest http) {
+		if (http.isUserInRole("ADMIN")) {
+			return "redirect:find_data_arrondissement_admin";
+		}
+		
+		return "redirect:findAll_data_arrondissements_user";
+	}
+	
+	@GetMapping("page_edit_arrondissement")
+	public String page_edit_arrondissement(HttpServletRequest http) {
+		if (http.isUserInRole("ADMIN")) {
+			return "redirect:find_data_arrondissement_admin";
+		}
+		
+		return "redirect:findAll_data_arrondissements_user";
+	}
+	
+	@GetMapping("page_delete_arrondissement")
+	public String page_delete_arrondissement(HttpServletRequest http) {
+		if (http.isUserInRole("ADMIN")) {
+			return "redirect:delete_data_arrondissement_admin";
+		}
+		
+		return "redirect:findAll_data_arrondissements_user";
+	}
 	
 
 }

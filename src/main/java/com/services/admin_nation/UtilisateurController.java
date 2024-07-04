@@ -20,6 +20,8 @@ public class UtilisateurController {
 	private AutoriteService servicesAutorite;
 	@Autowired
 	private SearchService serviceSearch;
+	@Autowired 
+	private ArrondissementService servicesArron;
 	
 	AdministrationCamerounApplication adminCam= new AdministrationCamerounApplication();
 	
@@ -158,6 +160,41 @@ public class UtilisateurController {
 		return "utilisateur/autorites/print_data";
 	}
 	
+	@GetMapping("findAll_data_arrondissements_user")
+	String findAll_data_arrondissements_admin(Model model) {
+		List<Departement> departements=servicesDep.displayData();
+		if (departements.isEmpty()) {
+			Arrondissement c= new Arrondissement(adminCam.genererID(),"Yaoundé 1","yaoundé","","","Mfoundi");
+			Arrondissement e= new Arrondissement(adminCam.genererID(),"Yaoundé 2","yaoundé","","","Mfoundi");
+			Arrondissement e_n= new Arrondissement(adminCam.genererID(),"Yaoundé 3","yaoundé","","","Mfoundi");
+			Arrondissement s= new Arrondissement(adminCam.genererID(),"Yaoundé 4","yaoundé","","","Mfoundi");
+			Arrondissement a= new Arrondissement(adminCam.genererID(),"Yaoundé 5","yaoundé","","","Mfoundi");
+			Arrondissement ne= new Arrondissement(adminCam.genererID(),"Yaoundé 6","yaoundé","","","Mfoundi");
+			Arrondissement n= new Arrondissement(adminCam.genererID(),"Yaoundé 7","yaoundé","","","Mfoundi");
+			Arrondissement se= new Arrondissement(adminCam.genererID(),"","","","","Nyong et Kéllé");
+			Arrondissement l= new Arrondissement(adminCam.genererID(),"","","","","Nyon et Mfoumou");
+			Arrondissement o= new Arrondissement(adminCam.genererID(),"","","","","Nyon et Mfoumou");
+			servicesArron.saveData(c);
+			servicesArron.saveData(e);
+			servicesArron.saveData(e_n);
+			servicesArron.saveData(s);
+			servicesArron.saveData(a);
+			servicesArron.saveData(ne);
+			servicesArron.saveData(n);
+			servicesArron.saveData(se);
+			servicesArron.saveData(l);
+			servicesArron.saveData(o);
+			
+			return "redirect:findAll_data_arrondissements_user";
+		}
+		String nb_d= serviceSearch.nb_departements();
+		model.addAttribute("departements", departements);
+		Search search=new Search();
+		model.addAttribute("departement", search);
+		model.addAttribute("nb", nb_d);
+		return "administrateur/arrondissements/findAll_data";
+	}
+	
 	// Méthodes pour les recherches
 	
 	@GetMapping("recherche_par_region_user")
@@ -193,32 +230,15 @@ public class UtilisateurController {
 		return "utilisateur/recherches/recherche_par_departement";
 	}
 	
-	@GetMapping("recherche_faq_user")
-	public String recherche_faq_admin(Model model) {
-		Search search = new Search();
-		model.addAttribute("search", search);
-		return "utilisateur/recherches/add_data";
-	}
-	
-	@PostMapping("find_all_data_faq_user")
-	String get_data_recherche_by_region(Model model, @ModelAttribute("search") Search search) {
+	@GetMapping("recherche_par_arrondissement_user")
+	String recherche_par_arrondissement_admin(Model model, @ModelAttribute("arrondissement") Search search) {
 		String key_name=search.getKeyName();
-		String key_type=search.getKeyType();
 		
-		if (key_type.equals("region")) {
-			List<Region> regions=serviceSearch.search_region(key_name);
-			model.addAttribute("regions", regions);
-		}
-		else if (key_type.equals("autorite")) {
-			List<Autorite> autorites=serviceSearch.search_autorite(key_name);
-			model.addAttribute("autorites", autorites);
-		}
-		else if (key_type.equals("departement")) {
-			List<Departement> departements=serviceSearch.search_departement(key_name);
-			model.addAttribute("departements", departements);
-		}
+		List<Arrondissement> arrondissements=serviceSearch.search_arrondissement(key_name);
+		model.addAttribute("arrondissements", arrondissements);
 		
-		return "utilisateur/recherches/findAll_data";
+		
+		return "utilisateur/recherches/recherche_par_arrondissement";
 	}
 
 }

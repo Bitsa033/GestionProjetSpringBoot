@@ -44,4 +44,9 @@ public class EquipeProjetService {
 		return "data deleted ";
 	}
 
+	public List<EquipeProjet> displayDataByname(String name) {
+		List<EquipeProjet> equipe= projetRepo.findAllByname(name);
+		return equipe;
+	}
+
 }

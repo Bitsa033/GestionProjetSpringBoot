@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -42,6 +43,13 @@ public class GestionProjetController {
 		model.addAttribute("nb", userss.nb_data());
 		return "utilisateur/find_all";
 	}
+	@GetMapping("print_projet")
+	String print_projet(Model model) {
+		List<Projet> projets = projetService.displayData();
+		model.addAttribute("projets", projets);
+		model.addAttribute("nb", projetService.nb_data());
+		return "projet/print";
+	}
 	@GetMapping("find_all_projet")
 	String projet(Model model) {
 		List<Projet> projets = projetService.displayData();
@@ -49,10 +57,18 @@ public class GestionProjetController {
 		model.addAttribute("nb", projetService.nb_data());
 		return "projet/find_all";
 	}
-	@GetMapping("find_all_equipe")
-	String equipe(Model model) {
-		List<EquipeProjet> equipe = equipeService.displayData();
+	@GetMapping("find_all_equipe_menu")
+	String find_all_equipe_menu(Model model) {
+		Projet projet= new Projet();
+		model.addAttribute("projet", projet);
+		
+		return "equipeProjet/find_all_equipe_menu";
+	}
+	@PostMapping("find_all_equipe")
+	String find_all_equipe(Model model, @ModelAttribute("projet") Projet projet) {
+		List<EquipeProjet> equipe = equipeService.displayDataByname(projet.getNom());
 		model.addAttribute("equipe", equipe);
+		model.addAttribute("nomProjet", projet.getNom());
 		model.addAttribute("nb", equipeService.nb_data());
 		return "equipeProjet/find_all";
 	}
@@ -124,6 +140,7 @@ public class GestionProjetController {
 		model.addAttribute("projet", projet);
 		return "projet/find";
 	}
+	
 	@GetMapping("find_equipe")
 	String find_equipe(Model model) {
 		EquipeProjet equipe= new EquipeProjet();

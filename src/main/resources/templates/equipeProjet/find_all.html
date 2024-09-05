@@ -67,23 +67,27 @@
                               
                         </div>
                         <div class="card-header">
-                        	<h5 th:text="${nb} + ' Données enregistrées'"></h5>
+                        	<div class="row">
+                        		<div class="col-md-4">
+                        			<h5 th:text="${nb} + ' Données enregistrées' "></h5>
+                        		</div>
+                        		<div class="col-md-8">
+                        			<h5 th:text="'Nom du  Projet : ' + ${nomProjet} "></h5>
+                        		</div>
+                        	</div>
+                        	
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered">
                             
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Projet</th>
-                                        <th>Membre</th>
+                                        <th>Membre(s)</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr th:each="a: ${equipe}">
-                                        <td th:text="${a.id}"></td>
-                                        <td th:text="${a.projet.nom}" ></td>
                                         <td th:text="${a.membre.username}"></td>
 
                                     </tr>
@@ -91,9 +95,7 @@
        
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Projet</th>
-                                        <th>Membre</th>
+                                        <th>Membre(s)</th>
                                     </tr>
                                      
                                 </tfoot>

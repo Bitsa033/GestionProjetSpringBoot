@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	        nativeQuery = true)
 	    public User find_name(String name);
 	@Query(
-	        value = "SELECT count(id) from user;",
+	        value = "SELECT count(idu) from user;",
 	        nativeQuery = true)
 	    public String n_b_data();
 }

@@ -9,17 +9,17 @@ import jakarta.persistence.Id;
 public class User {
 	@Id()
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idu;
 	private String username;
 	private String email;
 	private String password;
 	
 	public int getId() {
-		return id;
+		return idu;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idu = id;
 	}
 
 	public String getUsername() {

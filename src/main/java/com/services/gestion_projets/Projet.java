@@ -14,7 +14,7 @@ public class Projet {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idp;
 	private String nom;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "createur")
@@ -24,10 +24,10 @@ public class Projet {
 	private String statut;
 	
 	public int getId() {
-		return id;
+		return idp;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.idp = id;
 	}
 	public String getNom() {
 		return nom;

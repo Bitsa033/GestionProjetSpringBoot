@@ -12,7 +12,7 @@ public interface ProjetRepository extends JpaRepository<Projet, String> {
 	        nativeQuery = true)
 	    public List<Projet> search_data(String keyword);
 	@Query(
-	        value = "SELECT count(id) from projet;",
+	        value = "SELECT count(idp) from projet;",
 	        nativeQuery = true)
 	    public String n_b_data();
 	@Query(
